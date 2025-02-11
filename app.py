@@ -5,6 +5,22 @@ from nltk.corpus import stopwords
 import nltk
 from nltk.stem.porter import PorterStemmer
 
+
+import ssl
+
+# Fix SSL issue in cloud environments
+try:
+    _create_unverified_https_context = ssl._create_unverified_context
+except AttributeError:
+    pass
+else:
+    ssl._create_default_https_context = _create_unverified_https_context
+
+# Ensure 'punkt' is downloaded
+nltk.download('punkt')
+
+# Now use nltk.word_tokenize()
+
 ps = PorterStemmer()
 
 
